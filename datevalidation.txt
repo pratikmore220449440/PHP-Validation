@@ -1,0 +1,29 @@
+<?php   
+		$yourmonth = $_POST["formmonth"];
+		$yourday = $_POST["formday"];
+		$youryear = $_POST["formyear"];	
+		$user_date = strtotime("$yourday-$yourmonth-$youryear");
+		$today_date = strtotime(date("d F y"));
+		$diff_date = ($today_date - $user_date)/60/60/24;
+		$dayform=" ";
+		IF ($diff_date < 2)
+			$dayform="day";
+		ELSE
+			$dayform="days";
+		echo "<h4>CHECKDATE FORM RESULT</h4>";	
+		IF (checkdate($yourmonth, $yourday, $youryear))
+		{			
+			echo "The date entered is <b>valid</b>. <br />"; 
+		    echo "The date entered is <b>" . date('F d, Y', mktime(0,0,0,$yourmonth,$yourday,$youryear)). "</b>.<br />";
+			echo "Today is <b>". date("F d, Y"). "</b>.<br />";
+			echo "There are <b>" . $diff_date . " " . $dayform . "</b> between " . date("F d, Y"). " and " . date('F d, Y', mktime(0,0,0,$yourmonth,$yourday,$youryear)). ".";
+			echo "<br />";
+			echo "<p>To end your session, <a href=\" \"> sign-out</a>!</p>";
+		}
+		ELSE 
+		{
+			echo "The date entered is invalid. <br />Try again!";
+			echo "<br />";
+			echo "<p>To end your session, <a href=\" \"> sign-out</a>!</p>";
+		}
+?>
